@@ -34,7 +34,3 @@ All API responses follow the [jsend](https://github.com/omniti-labs/jsend.git) f
 
 [PostMan Collection](https://documenter.getpostman.com/view/38554123/2sBXietaKK)
 PostMan is a bit messy (only for testing)
-
-## Contributing
-
-We welcome contributions to help improve this template! Please take a look at our [Contributing Guidelines](CONTRIBUTING.md) for more details on how to get started and the submission process.
