@@ -2,7 +2,7 @@ import { headers } from 'next/headers';
 
 import { auth } from './auth';
 
-class UnauthorizedError extends Error {
+export class UnauthorizedError extends Error {
   status: number;
   constructor(message = 'Unauthorized') {
     super(message);
