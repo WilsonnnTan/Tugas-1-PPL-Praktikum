@@ -1,0 +1,25 @@
+import FeedbackService from '@/services/feedback.service';
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  try {
+    const allFeedbacks = await FeedbackService.getAllFeedback();
+    return NextResponse.json(
+      {
+        status: 'success',
+        data: {
+          feedbacks: allFeedbacks,
+        },
+      },
+      { status: 200 },
+    );
+  } catch {
+    return NextResponse.json(
+      {
+        status: 'error',
+        message: 'Internal Server Error',
+      },
+      { status: 500 },
+    );
+  }
+}
