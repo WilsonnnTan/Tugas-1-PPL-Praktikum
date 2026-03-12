@@ -99,6 +99,16 @@ export async function PATCH(
         },
         { status: err.status },
       );
+    } else if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      return NextResponse.json(
+        {
+          status: 'fail',
+          data: {
+            id: 'Feedback not found',
+          },
+        },
+        { status: 404 },
+      );
     }
     return NextResponse.json(
       {
