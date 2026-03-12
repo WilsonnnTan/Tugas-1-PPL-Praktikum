@@ -65,7 +65,7 @@ const FeedbackRepository = {
   async updateFeedback(
     userId: string,
     feedbackId: string,
-    data: FeedbackSchema,
+    data: Partial<FeedbackSchema>,
   ) {
     return prisma.feedback.update({
       data: data,
@@ -75,9 +75,7 @@ const FeedbackRepository = {
         category: true,
       },
       where: {
-        user: {
-          id: userId,
-        },
+        userId: userId,
         id: feedbackId,
       },
     });
@@ -86,9 +84,7 @@ const FeedbackRepository = {
   async deleteFeedback(userId: string, feedbackId: string) {
     return prisma.feedback.delete({
       where: {
-        user: {
-          id: userId,
-        },
+        userId: userId,
         id: feedbackId,
       },
     });

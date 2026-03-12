@@ -31,7 +31,7 @@ const FeedbackService = {
   async updateFeedback(
     userId: string,
     feedbackId: string,
-    data: FeedbackSchema,
+    data: Partial<FeedbackSchema>,
   ) {
     const updatedFeedback = await FeedbackRepository.updateFeedback(
       userId,

@@ -65,7 +65,7 @@ export async function PATCH(
     const userId = await requireUser();
     const body = await req.json();
 
-    const result = await FeedbackSchema.safeParseAsync(body);
+    const result = await FeedbackSchema.partial().safeParseAsync(body);
 
     if (!result.success) {
       const errors = result.error.flatten().fieldErrors;
