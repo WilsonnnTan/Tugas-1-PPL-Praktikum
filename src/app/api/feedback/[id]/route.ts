@@ -1,3 +1,4 @@
+import { Prisma } from '@/generated/prisma/client';
 import { requireUser } from '@/lib/auth/auth-api-helper';
 import { UnauthorizedError } from '@/lib/auth/auth-api-helper';
 import { FeedbackSchema } from '@/schemas/feedback.schema';
@@ -97,6 +98,54 @@ export async function PATCH(
           message: err.message,
         },
         { status: err.status },
+      );
+    }
+    return NextResponse.json(
+      {
+        status: 'error',
+        message: 'Internal Server Error',
+      },
+      { status: 500 },
+    );
+  }
+}
+
+export async function DELETE(
+  _req: NextRequest,
+  ctx: RouteContext<'/api/feedback/[id]'>,
+) {
+  const { id } = await ctx.params;
+
+  try {
+    const userId = await requireUser();
+
+    await FeedbackService.deleteFeedback(userId, id);
+
+    return NextResponse.json(
+      {
+        status: 'success',
+        data: null,
+      },
+      { status: 200 },
+    );
+  } catch (err) {
+    if (err instanceof UnauthorizedError) {
+      return NextResponse.json(
+        {
+          status: 'error',
+          message: err.message,
+        },
+        { status: err.status },
+      );
+    } else if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      return NextResponse.json(
+        {
+          status: 'fail',
+          data: {
+            id: 'Feedback not found',
+          },
+        },
+        { status: 404 },
       );
     }
     return NextResponse.json(

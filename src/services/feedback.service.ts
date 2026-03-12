@@ -40,6 +40,10 @@ const FeedbackService = {
     );
     return updatedFeedback;
   },
+
+  async deleteFeedback(userId: string, feedbackId: string) {
+    await FeedbackRepository.deleteFeedback(userId, feedbackId);
+  },
 };
 
 export default FeedbackService;

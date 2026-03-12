@@ -82,6 +82,17 @@ const FeedbackRepository = {
       },
     });
   },
+
+  async deleteFeedback(userId: string, feedbackId: string) {
+    return prisma.feedback.delete({
+      where: {
+        user: {
+          id: userId,
+        },
+        id: feedbackId,
+      },
+    });
+  },
 };
 
 export default FeedbackRepository;
