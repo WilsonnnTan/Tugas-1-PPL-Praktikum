@@ -10,6 +10,14 @@ const FeedbackService = {
     const Feedbacks = await FeedbackRepository.getFeedbackByUserId(userId);
     return Feedbacks;
   },
+
+  async getFeedbackDetail(userId: string, feedbackId: string) {
+    const feedbackDetail = await FeedbackRepository.getFeedbackDetail(
+      userId,
+      feedbackId,
+    );
+    return feedbackDetail;
+  },
 };
 
 export default FeedbackService;
