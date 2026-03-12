@@ -23,6 +23,7 @@ model User {
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
+  feedbacks     Feedback[]
 
   @@unique([email])
   @@map("user")
@@ -74,4 +75,29 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Feedback {
+  id          String    @id @default(cuid())
+  content     String
+  category    Category  @default(GENERAL)
+  userAgent   String?
+  resolved    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // relation to User
+  userId      String?   // nullable = guest can submit too
+  user        User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@map("feedback")
+}
+
+enum Category {
+  BUG
+  FEATURE_REQUEST
+  UX
+  PERFORMANCE
+  GENERAL
 }
