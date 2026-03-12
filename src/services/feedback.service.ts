@@ -27,6 +27,19 @@ const FeedbackService = {
     );
     return createdFeedback;
   },
+
+  async updateFeedback(
+    userId: string,
+    feedbackId: string,
+    data: FeedbackSchema,
+  ) {
+    const updatedFeedback = await FeedbackRepository.updateFeedback(
+      userId,
+      feedbackId,
+      data,
+    );
+    return updatedFeedback;
+  },
 };
 
 export default FeedbackService;

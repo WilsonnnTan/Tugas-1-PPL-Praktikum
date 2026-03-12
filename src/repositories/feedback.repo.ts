@@ -61,6 +61,27 @@ const FeedbackRepository = {
       },
     });
   },
+
+  async updateFeedback(
+    userId: string,
+    feedbackId: string,
+    data: FeedbackSchema,
+  ) {
+    return prisma.feedback.update({
+      data: data,
+      select: {
+        title: true,
+        content: true,
+        category: true,
+      },
+      where: {
+        user: {
+          id: userId,
+        },
+        id: feedbackId,
+      },
+    });
+  },
 };
 
 export default FeedbackRepository;
