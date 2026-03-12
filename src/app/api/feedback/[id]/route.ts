@@ -11,6 +11,19 @@ export async function GET(
   try {
     const userId = await requireUser();
     const feedbackDetail = await FeedbackService.getFeedbackDetail(userId, id);
+
+    if (!feedbackDetail) {
+      return NextResponse.json(
+        {
+          status: 'fail',
+          data: {
+            feedbacks: feedbackDetail,
+          },
+        },
+        { status: 404 },
+      );
+    }
+
     return NextResponse.json(
       {
         status: 'success',
