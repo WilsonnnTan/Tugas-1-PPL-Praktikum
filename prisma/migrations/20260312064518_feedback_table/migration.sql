@@ -4,10 +4,10 @@ CREATE TYPE "Category" AS ENUM ('BUG', 'FEATURE_REQUEST', 'UX', 'PERFORMANCE', '
 -- CreateTable
 CREATE TABLE "feedback" (
     "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
     "content" TEXT NOT NULL,
     "category" "Category" NOT NULL DEFAULT 'GENERAL',
     "userAgent" TEXT,
-    "resolved" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" TEXT,
