@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma';
+import type { FeedbackSchema } from '@/schemas/feedback.schema';
 
 const FeedbackRepository = {
   async getAllFeedback() {
@@ -43,6 +44,20 @@ const FeedbackRepository = {
         title: true,
         category: true,
         content: true,
+      },
+    });
+  },
+
+  async createFeedback(userId: string, data: FeedbackSchema) {
+    return prisma.feedback.create({
+      data: {
+        userId: userId,
+        ...data,
+      },
+      select: {
+        title: true,
+        content: true,
+        category: true,
       },
     });
   },
