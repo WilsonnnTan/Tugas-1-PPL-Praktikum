@@ -3,12 +3,12 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const AllFeedback = await FeedbackService.getAllFeedback();
+    const allFeedbacks = await FeedbackService.getAllFeedback();
     return NextResponse.json(
       {
         status: 'success',
         data: {
-          feedbacks: AllFeedback,
+          feedbacks: allFeedbacks,
         },
       },
       { status: 200 },

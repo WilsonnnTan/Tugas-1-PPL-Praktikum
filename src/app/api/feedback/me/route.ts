@@ -6,12 +6,12 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   try {
     const userId = await requireUser();
-    const Feedbacks = await FeedbackService.getFeedbackByUserId(userId);
+    const feedbacks = await FeedbackService.getFeedbackByUserId(userId);
     return NextResponse.json(
       {
         status: 'success',
         data: {
-          feedbacks: Feedbacks,
+          feedbacks: feedbacks,
         },
       },
       { status: 200 },

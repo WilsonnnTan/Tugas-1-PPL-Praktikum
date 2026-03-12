@@ -2,13 +2,13 @@ import FeedbackRepository from '@/repositories/feedback.repo';
 
 const FeedbackService = {
   async getAllFeedback() {
-    const AllFeedback = await FeedbackRepository.getAllFeedback();
-    return AllFeedback;
+    const allFeedbacks = await FeedbackRepository.getAllFeedback();
+    return allFeedbacks;
   },
 
   async getFeedbackByUserId(userId: string) {
-    const Feedbacks = await FeedbackRepository.getFeedbackByUserId(userId);
-    return Feedbacks;
+    const feedbacks = await FeedbackRepository.getFeedbackByUserId(userId);
+    return feedbacks;
   },
 
   async getFeedbackDetail(userId: string, feedbackId: string) {
