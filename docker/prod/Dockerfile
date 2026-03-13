@@ -40,7 +40,7 @@ RUN pnpm run build
 # Use the same Node.js version for the final production container
 FROM node:${NODE_VERSION} AS runner
 
-ENV PORT=80
+ENV PORT=3000
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Set the working directory inside the container
@@ -54,6 +54,6 @@ COPY --chown=node:node --from=builder /app/public ./public
 # Switch to non-root user AFTER copying files
 USER node
 
-EXPOSE 80
+EXPOSE 3000
 
 CMD ["node", "server.js"]
