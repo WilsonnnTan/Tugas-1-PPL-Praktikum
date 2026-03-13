@@ -1,5 +1,7 @@
 node_modules
 .next
 .git
-docker/**
+docker
 .env
+.husky
+.github
