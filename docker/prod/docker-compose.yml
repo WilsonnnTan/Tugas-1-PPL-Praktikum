@@ -1,13 +1,13 @@
 services:
   # migrate database (using supabase so just inject the .env)
   migrate:
-    image: 'wilson23001/tugas-1-ppl-praktikum-migrate'
+    image: 'wilson23001/tugas-1-ppl-praktikum-migrate:main'
     env_file:
       - ../../.env
     command: pnpm prisma migrate deploy
 
   app:
-    image: 'wilson23001/tugas-1-ppl-praktikum'
+    image: 'wilson23001/tugas-1-ppl-praktikum:main'
     depends_on:
       migrate:
         condition: service_completed_successfully
