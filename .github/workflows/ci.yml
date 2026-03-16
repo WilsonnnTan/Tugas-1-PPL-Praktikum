@@ -14,6 +14,7 @@ env:
   POSTGRES_PASSWORD: testpassword
   POSTGRES_DB: testdb
   DATABASE_URL: postgresql:/$POSTGRES_USER:$POSTGRES_PASSWORD@localhost:5432/$POSTGRES_DB
+  DIRECT_URL: postgresql:/$POSTGRES_USER:$POSTGRES_PASSWORD@localhost:5432/$POSTGRES_DB
 
 jobs:
   ci:
