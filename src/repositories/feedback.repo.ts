@@ -55,6 +55,7 @@ const FeedbackRepository = {
         ...data,
       },
       select: {
+        id: true,
         title: true,
         content: true,
         category: true,
