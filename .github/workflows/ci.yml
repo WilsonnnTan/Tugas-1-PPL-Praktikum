@@ -7,10 +7,29 @@ on:
   push:
     branches: [main]
 
+# temp .env for CI
+env:
+  BETTER_AUTH_SECRET: my-betterauth-secret
+  POSTGRES_USER: testuser
+  POSTGRES_PASSWORD: testpassword
+  POSTGRES_DB: testdb
+  DATABASE_URL: postgresql:/$POSTGRES_USER:$POSTGRES_PASSWORD@localhost:5432/$POSTGRES_DB
+
 jobs:
   ci:
     name: Lint, Prettier, and Test Case Check
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:18-alpine
+        env:
+          POSTGRES_USER: $POSTGRES_USER
+          POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+          POSTGRES_DB: $POSTGRES_DB
+        ports:
+          - 5432:5432
+
     steps:
       - name: Checkout branch
         uses: actions/checkout@v6
@@ -34,6 +53,10 @@ jobs:
 
       - name: Prettier check
         run: pnpm format:check
+
+      # Migrate before test
+      - name: Run migration
+        run: pnpm prisma migrate dev
 
       - name: Run test cases
         run: pnpm run test
